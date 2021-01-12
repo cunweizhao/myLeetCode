@@ -18,9 +18,10 @@ public class Test1 {
      */
     public static int[] twoSum(int[] nums, int target){
         int[] temp = new int[2];
+        int t=0,y=0;
         for(int i=0;i<nums.length;i++){
 
-            int num = nums[i];
+            //int num = nums[i];
             /**
              * 下面这个方法不适合：
              *  int[] nums ={3,2,3};
@@ -65,10 +66,41 @@ public class Test1 {
 //                return temp;
 //            }
             ////////////
+//             t = target-num;
+//            if(i+1<nums.length){
+//                y=nums[i+1];
+//                if(t==y){
+//                    temp[0]=i;
+//                    temp[1]=i+1;
+//                    return temp;
+//                }
+//
+//            }
+//            for(int z=1;z<nums.length;z++){
+//                int a = nums[z];
+//                if(a==t){
+//                    temp[0]=i;
+//                    temp[1]=z;
+//                    return temp;
+//                }
+//            }
 
 
 
             //////////////
+
+            int num = nums[i];
+            t=target-num;
+            for(int z=i+1;z<nums.length;z++){
+                y= nums[z];
+                if(t==y){
+                    temp[0]=i;
+                    temp[1]=z;
+                    return temp;
+                }
+            }
+
+            ///////////////
         }
         return null;
     }
@@ -91,7 +123,10 @@ public class Test1 {
 //        int[] nums ={3,2,3};
 //        int target=6;
 
-        int[] nums ={3,3};
+        //int[] nums ={3,3};
+        //int target=6;
+
+        int[] nums={1,3,4,2};
         int target=6;
 
         int[] ints = Test1.twoSum(nums, target);
