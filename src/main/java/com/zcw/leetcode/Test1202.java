@@ -12,16 +12,20 @@ import java.util.*;
 public class Test1202 {
 
     public static String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
-        //初始化连通图
+
+        //初始化连通图，把字符串的长度传到对象的构造方法总
         DisjointSetUnion dsu = new DisjointSetUnion(s.length());
+
+        //遍历传递的参数
         for (List<Integer> pair : pairs) {
-            //合并
+            //合并： 传递：参数0，1是因为我们传递的数组只包含两个数据，索引-0 ，索引-1
             dsu.unionSet(pair.get(0), pair.get(1));
         }
         //使用map存储祖先节点到子节点列表的映射，存储并查集结果
         //例如s = "dcab", pairs = [[0,3],[1,2]]
         //0:[d,b]  1:[c,a]
         Map<Integer, List<Character>> map = new HashMap<Integer, List<Character>>();
+
         for (int i = 0; i < s.length(); i++) {
             //找到该节点的父节点
             int parent = dsu.find(i);
@@ -74,7 +78,7 @@ public class Test1202 {
 
 class DisjointSetUnion {
     /**
-     * 并查集长度
+     * 并差集长度
      */
     int n;
     /**
@@ -90,21 +94,27 @@ class DisjointSetUnion {
     /**
      * 构造函数,初始化属性
      */
-
     public DisjointSetUnion(int n) {
+        //字符串长度赋值给，对象属性
         this.n = n;
+        //初始化当前对象数组，长度为字符串长度
         rank = new int[n];
+
+        //rank是对象中数组变量，1是一个rank中元素数据类型的值，作用：填充rank数组中的每个元素都是1
         Arrays.fill(rank, 1);
+        //初始化数组，用来存放对应的祖先结点
         f = new int[n];
+        //遍历字符串长度，然后填充数组f，为后续的递归进行操作数据
         for (int i = 0; i < n; i++) {
             f[i] = i;
         }
     }
 
     /**
-     * 方法find,寻找给节点的祖先
+     * 方法find,寻找已经传递节点的祖先
      */
     public int find(int x) {
+        //三元表达式，递归调用当前方法，相等后返回数据
         return f[x] == x ? x : (f[x] = find(f[x]));
     }
 
