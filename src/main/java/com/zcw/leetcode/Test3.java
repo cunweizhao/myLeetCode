@@ -1,8 +1,6 @@
 package com.zcw.leetcode;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -47,42 +45,70 @@ public class Test3 {
 
         //用来存放list长度，然后最后再倒序，获取最大值
 
-        List<Integer> countList = new ArrayList<>();
-
-        List<Character> characterList = new ArrayList<>();
-
+//        List<Integer> countList = new ArrayList<>();
+//
+//        List<Character> characterList = new ArrayList<>();
+//
+//        if(s.length()==1){
+//            return 1;
+//        }
+//        char c1 = s.charAt(0);
+//        characterList.add(c1);
+//        for(int i=1;i<s.length();i++){
+//            char c = s.charAt(i);
+//            if(characterList.contains(c)){
+//                countList.add(characterList.size());
+//                characterList.clear();
+//                characterList.add(c);
+//            }else{
+//                characterList.add(c);
+//                if(i==s.length()-1){
+//                    countList.add(characterList.size());
+//                }
+//            }
+//        }
+//        if(countList.size()>0){
+//            Collections.sort(countList,Collections.reverseOrder());
+//            return countList.get(0);
+//        }
+   //.......................思路三................................
         if(s.length()==1){
             return 1;
         }
-        char c1 = s.charAt(0);
-        characterList.add(c1);
-        for(int i=1;i<s.length();i++){
-            char c = s.charAt(i);
-            if(characterList.contains(c)){
-                countList.add(characterList.size());
-                characterList.clear();
-            }else{
-                characterList.add(c);
-            }
-        }
-        if(countList.size()>0){
-            return countList.get(0);
-        }
+        Map<Character,Integer> map = new HashMap<>();
+        List<Integer> tempArray = new ArrayList<>();
+        int temp=0;
 
+       for(int i=0;i<s.length();i++){
+
+           Integer integer = map.get(s.charAt(i));
+           if(integer !=null){
+               /**
+                * 当进入此处时，证明我们循环的字段已经在map里面存在了，
+                * 需要判断当前字段map前面或者以后循环的字段长度大小
+                */
+               //前面
+               tempArray.add(integer);
+           }
+           map.put(s.charAt(i),i);
+
+       }
         return 0;
     }
 
     public static void main(String[] args) {
         //案例1：
-        String s1="abcabcbb";
-        int i = Test3.lengthOfLongestSubstring(s1);
-        System.out.println(i);
-        //案例2：
-        String s2="bbbbb";
-        int i1 = Test3.lengthOfLongestSubstring(s2);
-        System.out.println(i1);
+//        String s1="abcabcbb";
+//        int i = Test3.lengthOfLongestSubstring(s1);
+//        System.out.println(i);
+//        //案例2：
+//        String s2="bbbbb";
+//        int i1 = Test3.lengthOfLongestSubstring(s2);
+//        System.out.println(i1);
         //案例3：
-        String s3="pwwkew";
+        //String s3="pwwkew";
+//        String s3="aab";
+        String s3="dvdf";
         int i2 = Test3.lengthOfLongestSubstring(s3);
         System.out.println(i2);
 
