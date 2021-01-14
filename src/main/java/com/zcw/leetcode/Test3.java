@@ -100,6 +100,7 @@ public class Test3 {
         Map<Character,String> map = new HashMap<>();
         for(int i=0;i<ss.length();i++){
             for(int j=i;j<ss.length();j++){
+                //判断 Map 集合对象中是否包含指定的键名
                 if(!map.containsKey(ss.charAt(j))){
                     map.put(ss.charAt(j),"");
                 }else{
