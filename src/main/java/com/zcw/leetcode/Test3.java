@@ -72,28 +72,47 @@ public class Test3 {
 //            return countList.get(0);
 //        }
    //.......................思路三................................
-        if(s.length()==1){
-            return 1;
+//        if(s.length()==1){
+//            return 1;
+//        }
+//        Map<Character,Integer> map = new HashMap<>();
+//        List<Integer> tempArray = new ArrayList<>();
+//        int temp=0;
+//
+//       for(int i=0;i<s.length();i++){
+//
+//           Integer integer = map.get(s.charAt(i));
+//           if(integer !=null){
+//               /**
+//                * 当进入此处时，证明我们循环的字段已经在map里面存在了，
+//                * 需要判断当前字段map前面或者以后循环的字段长度大小
+//                */
+//               //前面
+//               tempArray.add(integer);
+//           }
+//           map.put(s.charAt(i),i);
+//
+//       }
+//        return 0;
+        //.........................思路三，直接看其他人的答案..........
+        StringBuilder ss = new StringBuilder(s);
+        int count =1;
+        Map<Character,String> map = new HashMap<>();
+        for(int i=0;i<ss.length();i++){
+            for(int j=i;j<ss.length();j++){
+                if(!map.containsKey(ss.charAt(j))){
+                    map.put(ss.charAt(j),"");
+                }else{
+                    if(map.size()>count){
+                        count=map.size();
+                    }
+                    map.clear();
+                    break;
+                }
+            }
         }
-        Map<Character,Integer> map = new HashMap<>();
-        List<Integer> tempArray = new ArrayList<>();
-        int temp=0;
 
-       for(int i=0;i<s.length();i++){
-
-           Integer integer = map.get(s.charAt(i));
-           if(integer !=null){
-               /**
-                * 当进入此处时，证明我们循环的字段已经在map里面存在了，
-                * 需要判断当前字段map前面或者以后循环的字段长度大小
-                */
-               //前面
-               tempArray.add(integer);
-           }
-           map.put(s.charAt(i),i);
-
-       }
-        return 0;
+        return count;
     }
 
     public static void main(String[] args) {
@@ -107,8 +126,8 @@ public class Test3 {
 //        System.out.println(i1);
         //案例3：
         //String s3="pwwkew";
-//        String s3="aab";
-        String s3="dvdf";
+        String s3="aab";
+        //String s3="dvdf";
         int i2 = Test3.lengthOfLongestSubstring(s3);
         System.out.println(i2);
 
